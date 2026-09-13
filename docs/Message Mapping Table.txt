@@ -1,0 +1,10 @@
+Meeage Mapping Table
+
+| Message | Category         | Disposition |
+| ------- | ---------------- | ----------- |
+| m017    | Prompt Injection | FLAG        |
+| m023    | Phishing         | FLAG        |
+| m012    | Ambiguous        | REPLY       |
+| m018    | Legal            | ESCALATE    |
+| m083    | Newsletter       | ARCHIVE     |
+

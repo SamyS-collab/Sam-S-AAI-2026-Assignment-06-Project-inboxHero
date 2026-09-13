@@ -1,0 +1,107 @@
+Project Structure
+inboxHero/
+│
+├── README.md
+├── requirements.txt
+├── .env.example
+├── config.py
+├── demo.py
+│
+├── inbox/
+│   └── inbox.json
+│
+├── outbox/
+│
+├── logs/
+│   ├── trace.jsonl
+│   ├── approval_log.json
+│   └── security_log.json
+│
+├── data/
+│   ├── preferences.json
+│   ├── commitments.json
+│   └── classifications.json
+│
+├── core/
+│   ├── inbox_loader.py
+│   ├── message_model.py
+│   ├── router.py
+│   ├── disposition_engine.py
+│   └── audit_logger.py
+│
+├── classifiers/
+│   ├── newsletter_classifier.py
+│   ├── receipt_classifier.py
+│   ├── notification_classifier.py
+│   ├── meeting_classifier.py
+│   └── llm_classifier.py
+│
+├── security/
+│   ├── phishing_detector.py
+│   ├── prompt_injection_detector.py
+│   ├── policy_validator.py
+│   └── security_engine.py
+│
+├── retrieval/
+│   ├── thread_retriever.py
+│   ├── message_lookup.py
+│   └── retrieval_engine.py
+│
+├── memory/
+│   ├── preference_manager.py
+│   └── preference_store.py
+│
+├── llm/
+│   ├── llm_service.py
+│   ├── prompt_templates.py
+│   ├── reply_generator.py
+│   └── thread_summarizer.py
+│
+├── commitments/
+│   ├── extractor.py
+│   ├── conflict_detector.py
+│   └── commitment_manager.py
+│
+├── actions/
+│   ├── gatekeeper.py
+│   ├── approval_manager.py
+│   ├── outbox_writer.py
+│   └── action_classifier.py
+│
+├── dashboard/
+│   ├── dashboard_builder.py
+│   ├── html_renderer.py
+│   └── templates/
+│       └── dashboard.html
+│
+├── capabilities/
+│   ├── r1_zeroing.py
+│   ├── r2_grounded_reply.py
+│   ├── r3_safety_gate.py
+│   ├── r4_preference_memory.py
+│   ├── r5_hostile_inbox.py
+│   ├── r6_dashboard.py
+│   │
+│   ├── x1_daily_digest.py
+│   ├── x2_followup_tracker.py
+│   ├── x3_thread_summary.py
+│   ├── x4_explain_decision.py
+│   └── x5_commitment_planner.py
+│
+├── manifests/
+│   ├── CAPABILITIES.md
+│   └── capabilities.json
+│
+├── tests/
+│   ├── test_classifiers.py
+│   ├── test_security.py
+│   ├── test_retrieval.py
+│   ├── test_memory.py
+│   ├── test_gatekeeper.py
+│   └── test_dashboard.py
+│
+└── docs/
+    ├── DESIGN_NOTES.md
+    ├── ARCHITECTURE.md
+    └── ARCHITECTURE_DIAGRAM.txt
+
