@@ -1,0 +1,13 @@
+Project InboxHero System Modules
+
+| Module                 | Responsibility                          |
+| ---------------------- | --------------------------------------- |
+| inbox\_loader.py       | Read inbox.json                         |
+| classifier.py          | Rule-based categorization               |
+| security\_guard.py     | Prompt injection and phishing detection |
+| retriever.py           | Thread retrieval                        |
+| reply\_generator.py    | Draft replies                           |
+| preference\_manager.py | Persistent memory                       |
+| gatekeeper.py          | Human approval and dry run              |
+| dashboard.py           | Build three-pane dashboard              |
+
