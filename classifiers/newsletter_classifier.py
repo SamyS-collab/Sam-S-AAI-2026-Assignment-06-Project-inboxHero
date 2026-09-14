@@ -14,7 +14,6 @@ from __future__ import annotations
 
 from core.message_model import Message
 
-
 class NewsletterClassifier:
     """
     Detects newsletters using lightweight rules.
@@ -29,6 +28,12 @@ class NewsletterClassifier:
         "medium.com",
         "coursera.org",
         "hackernewsletter",
+    }
+
+    EXCLUDED_SENDERS = {
+        "cloudflare.com",
+        "figma.com",
+        "todoist.com",
     }
 
     NEWSLETTER_SUBJECT_KEYWORDS = {
@@ -53,11 +58,16 @@ class NewsletterClassifier:
         sender = message.sender.lower()
         subject = message.subject.lower()
 
+        # Explicit exclusions
+        for excluded in self.EXCLUDED_SENDERS:
+            if excluded in sender:
+                return False
+
         # Sender-based rules
         for keyword in self.NEWSLETTER_SENDERS:
             if keyword in sender:
                 return True
-
+            
         # Subject-based rules
         for keyword in self.NEWSLETTER_SUBJECT_KEYWORDS:
             if keyword in subject:
