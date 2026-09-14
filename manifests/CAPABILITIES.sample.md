@@ -1,3 +1,35 @@
+## Assumptions ##
+
+Assumption 1:
+Every message contains:
+
+id
+thread_id
+from
+to
+subject
+timestamp
+body
+unread
+
+Assumption 2:
+thread_id groups related messages.
+
+Assumption 3:
+timestamps are ISO-8601 formatted.
+
+Assumption 4:
+message ids are unique.
+
+
+
+
+
+
+
+
+
+
 # CAPABILITIES.md — SAMPLE
 
 
