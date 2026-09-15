@@ -1,0 +1,14 @@
+{
+    "meeting_constraints": [
+        {
+            "source_message_id": "m041",
+            "instruction": "No meetings before 11:00 AM"
+        }
+    ],
+    "correspondence_rules": [
+        {
+            "source_message_id": "m015",
+            "instruction": "CC Priya on legal correspondence from Hartwell & Cho"
+        }
+    ]
+}
