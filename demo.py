@@ -1,41 +1,125 @@
-# retrieval engine test
+# outbox writer test
 
-from retrieval.retrieval_engine import (
-    RetrievalEngine
+from actions.outbox_writer import OutboxWriter
+
+writer = OutboxWriter()
+
+path = writer.write_draft(
+    message_id="m012",
+    content="Could you clarify the deadline?",
+    source_message_ids=["m012"],
 )
 
-engine = RetrievalEngine()
+print(path)
 
-print(
-    "Exists m008:",
-    engine.exists("m008")
-)
 
-context = engine.get_message_context(
-    "m008"
-)
+# ================================================================================
 
-print("\nCurrent Message:")
-print(
-    context["message"].message_id
-)
+# # approval manager test
 
-print("\nThread Messages:")
+# from core.dispositions import Disposition
+# from core.disposition_engine import DispositionDecision
 
-for message in context["thread"]:
-    print(
-        message.message_id,
-        message.subject
-    )
+# from actions.gatekeeper import Gatekeeper
+# from actions.approval_manager import ApprovalManager
 
-print(
-    "\nSource Messages:",
-    len(
-        engine.get_source_messages(
-            "m008"
-        )
-    )
-)
+# decision = DispositionDecision(
+#     message_id="m001",
+#     disposition=Disposition.REPLY,
+#     reason="Meeting request",
+#     category="meeting",
+#     handled_by="rule",
+#     model_required=False,
+# )
+
+# gatekeeper = Gatekeeper()
+
+# gate_decision = gatekeeper.evaluate(
+#     decision
+# )
+
+# approval_manager = ApprovalManager()
+
+# approval_manager.approve(
+#     gate_decision
+# )
+
+# print(
+#     approval_manager.get_approval(
+#         "m001"
+#     )
+# )
+
+# print(
+#     approval_manager.get_all_approvals()
+# )
+
+
+# ================================================================================
+
+# # gatekeeper test
+
+# from core.dispositions import Disposition
+# from core.disposition_engine import DispositionDecision
+# from actions.gatekeeper import Gatekeeper
+
+# decision = DispositionDecision(
+#     message_id="m001",
+#     disposition=Disposition.REPLY,
+#     reason="Meeting request detected",
+#     category="meeting",
+#     handled_by="rule",
+#     model_required=False,
+# )
+
+# gatekeeper = Gatekeeper()
+
+# result = gatekeeper.evaluate(decision)
+
+# print(result)
+# print(result.to_dict())
+
+
+# ================================================================================
+
+# # retrieval engine test
+
+# from retrieval.retrieval_engine import (
+#     RetrievalEngine
+# )
+
+# engine = RetrievalEngine()
+
+# print(
+#     "Exists m008:",
+#     engine.exists("m008")
+# )
+
+# context = engine.get_message_context(
+#     "m008"
+# )
+
+# print("\nCurrent Message:")
+# print(
+#     context["message"].message_id
+# )
+
+# print("\nThread Messages:")
+
+# for message in context["thread"]:
+#     print(
+#         message.message_id,
+#         message.subject
+#     )
+
+# print(
+#     "\nSource Messages:",
+#     len(
+#         engine.get_source_messages(
+#             "m008"
+#         )
+#     )
+# )
 
 
 

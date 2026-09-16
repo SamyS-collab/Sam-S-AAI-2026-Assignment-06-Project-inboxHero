@@ -1,0 +1,11 @@
+{
+    "approvals": [
+        {
+            "message_id": "m001",
+            "disposition": "REPLY",
+            "approved": true,
+            "approved_by": "user",
+            "timestamp": "2026-09-16T15:31:04.925627"
+        }
+    ]
+}

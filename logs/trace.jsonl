@@ -19,3 +19,6 @@
 {"timestamp": "2026-09-15T16:19:22.545763", "event": "PREFERENCES_LOADED", "meeting_constraints": 1, "correspondence_rules": 1}
 {"timestamp": "2026-09-15T16:19:22.546551", "event": "MEETING_CONSTRAINT_DUPLICATE_SKIPPED", "source_message_id": "m041", "instruction": "No meetings before 11:00 AM"}
 {"timestamp": "2026-09-15T16:19:22.547609", "event": "CORRESPONDENCE_RULE_DUPLICATE_SKIPPED", "source_message_id": "m015", "instruction": "CC Priya on legal correspondence from Hartwell & Cho"}
+{"timestamp": "2026-09-16T15:31:04.926294", "event": "APPROVAL_RECORDED", "message_id": "m001", "disposition": "REPLY", "approved": true, "approved_by": "user"}
+{"timestamp": "2026-09-16T15:45:29.963653", "event": "DRAFT_WRITTEN", "message_id": "m012", "draft_type": "reply", "file_path": "C:\\Users\\ssardal\\Sam-S-AAI-2026-Assignment-06-Project-inboxHero\\outbox\\m012_reply.json"}
+{"timestamp": "2026-09-16T15:47:11.613934", "event": "DRAFT_WRITTEN", "message_id": "m012", "draft_type": "reply", "file_path": "C:\\Users\\ssardal\\Sam-S-AAI-2026-Assignment-06-Project-inboxHero\\outbox\\m012_reply.json"}
