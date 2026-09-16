@@ -1,43 +1,125 @@
-# Preference Manager Test 
+# retrieval engine test
 
-from memory.preference_manager import PreferenceManager
-
-manager = PreferenceManager()
-
-manager.add_meeting_constraint(
-    source_message_id="m041",
-    instruction="No meetings before 11:00 AM"
+from retrieval.retrieval_engine import (
+    RetrievalEngine
 )
 
-manager.add_correspondence_rule(
-    source_message_id="m015",
-    instruction="CC Priya on legal correspondence from Hartwell & Cho"
+engine = RetrievalEngine()
+
+print(
+    "Exists m008:",
+    engine.exists("m008")
 )
 
-print(manager.get_meeting_constraints())
-print(manager.get_correspondence_rules())
-print(manager.get_all_preferences())
+context = engine.get_message_context(
+    "m008"
+)
+
+print("\nCurrent Message:")
+print(
+    context["message"].message_id
+)
+
+print("\nThread Messages:")
+
+for message in context["thread"]:
+    print(
+        message.message_id,
+        message.subject
+    )
+
+print(
+    "\nSource Messages:",
+    len(
+        engine.get_source_messages(
+            "m008"
+        )
+    )
+)
 
 
 
+# ================================================================================
+
+# # thread retriever test
+
+# from retrieval.thread_retriever import ThreadRetriever
+
+# retriever = ThreadRetriever()
+
+# print("Thread Count:")
+# print(retriever.count())
+
+# print("\nThread ID for m003:")
+# print(
+#     retriever.get_thread_id("m003")
+# )
+
+# print("\nMessages in thread of m003:")
+
+# thread = retriever.get_thread_by_message(
+#     "m003"
+# )
+
+# for msg in thread:
+#     print(
+#         msg.message_id,
+#         msg.subject
+#     )
+
+# print(
+#     len(
+#         retriever.get_thread("t-api")
+#     )
+# )
 
 
+# ================================================================================
+
+# # Retrieval message lookup test
+
+# from retrieval.message_lookup import MessageLookup
+
+# lookup = MessageLookup()
+
+# print("Total Messages:", lookup.count())
+
+# print("\nExists m003:")
+# print(lookup.exists("m003"))
+
+# print("\nMessage m003:")
+# print(lookup.get_message("m003"))
+
+# print("\nMultiple Messages:")
+# messages = lookup.get_messages(
+#     ["m001", "m003", "bad_id"]
+# )
+
+# for msg in messages:
+#     print(msg.message_id, msg.subject)
 
 
+# =============================================================
 
+# # Preference Manager Test 
 
+# from memory.preference_manager import PreferenceManager
 
+# manager = PreferenceManager()
 
+# manager.add_meeting_constraint(
+#     source_message_id="m041",
+#     instruction="No meetings before 11:00 AM"
+# )
 
+# manager.add_correspondence_rule(
+#     source_message_id="m015",
+#     instruction="CC Priya on legal correspondence from Hartwell & Cho"
+# )
 
-
-
-
-
-
-
-
-
+# print(manager.get_meeting_constraints())
+# print(manager.get_correspondence_rules())
+# print(manager.get_all_preferences())
 
 
 # # Preference Store Verification
