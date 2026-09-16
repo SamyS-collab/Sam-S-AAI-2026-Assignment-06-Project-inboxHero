@@ -1,16 +1,218 @@
-# outbox writer test
+# commitment manager test
 
-from actions.outbox_writer import OutboxWriter
+from core.inbox_loader import InboxLoader
 
-writer = OutboxWriter()
-
-path = writer.write_draft(
-    message_id="m012",
-    content="Could you clarify the deadline?",
-    source_message_ids=["m012"],
+from commitments.commitment_manager import (
+    CommitmentManager,
 )
 
-print(path)
+loader = InboxLoader()
+
+messages = loader.load()
+
+manager = CommitmentManager()
+
+manager.build(messages)
+
+print(
+    "Commitments:",
+    len(
+        manager.get_commitments()
+    )
+)
+
+print(
+    "Conflicts:",
+    len(
+        manager.get_conflicts()
+    )
+)
+
+manager.save()
+
+print("\nSaved JSON\n")
+
+print(
+    manager.load()
+)
+
+
+
+# # Conflict detection test
+
+# from core.inbox_loader import InboxLoader
+
+# from commitments.extractor import (
+#     CommitmentExtractor,
+# )
+
+# from commitments.conflict_detector import (
+#     ConflictDetector,
+# )
+
+# loader = InboxLoader()
+# messages = loader.load()
+
+# extractor = CommitmentExtractor()
+# detector = ConflictDetector()
+
+# commitments = []
+
+# for message in messages:
+
+#     commitment = extractor.extract(
+#         message
+#     )
+
+#     if commitment:
+#         commitments.append(
+#             commitment
+#         )
+
+# # -----------------------------------------
+# # Commitments
+# # -----------------------------------------
+
+# print("\n=== Extracted Commitments ===\n")
+
+# print(
+#     f"Commitments: {len(commitments)}"
+# )
+
+# print()
+
+# for commitment in commitments:
+
+#     print(
+#         f"{commitment.message_id}"
+#         f" | {commitment.commitment_type}"
+#         f" | {commitment.title}"
+#         f" | {commitment.event_time}"
+#     )
+
+# print()
+
+# # -----------------------------------------
+# # Conflicts
+# # -----------------------------------------
+
+# conflicts = detector.detect(
+#     commitments
+# )
+
+# print(
+#     f"Conflicts: {len(conflicts)}"
+# )
+
+# print()
+
+# if not conflicts:
+#     print("No conflicts detected.")
+
+# for conflict in conflicts:
+
+#     print(
+#         conflict.commitment_a.message_id,
+#         "(",
+#         conflict.commitment_a.title,
+#         ")",
+#         "vs",
+#         conflict.commitment_b.message_id,
+#         "(",
+#         conflict.commitment_b.title,
+#         ")"
+#     )
+
+#     print(
+#         "Conflict Time:",
+#         conflict.conflict_time
+#     )
+
+#     print("-" * 60)
+
+
+# ================================================================================
+
+# # commitment extractor test
+
+# from core.inbox_loader import InboxLoader
+# from commitments.extractor import CommitmentExtractor
+
+# loader = InboxLoader()
+# messages = loader.load()
+
+# extractor = CommitmentExtractor()
+
+# print("=== Commitment Extraction Test ===\n")
+
+# test_ids = {
+#     "m010",
+#     "m061",
+#     "m080",
+#     "m023",
+# }
+
+# for message in messages:
+
+#     if message.message_id not in test_ids:
+#         continue
+
+#     commitment = extractor.extract(message)
+
+#     print(f"Message: {message.message_id}")
+#     print(f"Subject: {message.subject}")
+
+#     if commitment:
+#         print("COMMITMENT DETECTED")
+#         print(commitment)
+#     else:
+#         print("NO COMMITMENT DETECTED")
+
+#     print("-" * 60)
+
+# print("\n=== Full Inbox Scan ===\n")
+
+# commitments = []
+
+# for message in messages:
+
+#     commitment = extractor.extract(message)
+
+#     if commitment:
+#         commitments.append(commitment)
+
+# print(
+#     f"Total commitments extracted: "
+#     f"{len(commitments)}"
+# )
+
+# print("\nSample Results:")
+
+# for commitment in commitments[:10]:
+#     print(
+#         commitment.message_id,
+#         "|",
+#         commitment.title,
+#         "|",
+#         commitment.event_time,
+#     )
+
+
+# ================================================================================
+
+# # outbox writer test
+
+# from actions.outbox_writer import OutboxWriter
+
+# writer = OutboxWriter()
+
+# path = writer.write_draft(
+#     message_id="m012",
+#     content="Could you clarify the deadline?",
+#     source_message_ids=["m012"],
+# )
+
+# print(path)
 
 
 # ================================================================================

@@ -1,0 +1,46 @@
+{
+    "commitments": [
+        {
+            "message_id": "m080",
+            "title": "Google Calendar: Standup in 10 minutes",
+            "commitment_type": "MEETING",
+            "event_time": "2026-09-02T09:30:00",
+            "source_message_id": "m080"
+        },
+        {
+            "message_id": "m038",
+            "title": "Board review scheduled",
+            "commitment_type": "EVENT",
+            "event_time": "2026-09-06T10:00:00",
+            "source_message_id": "m038"
+        },
+        {
+            "message_id": "m010",
+            "title": "Intro call this week?",
+            "commitment_type": "MEETING",
+            "event_time": "2026-09-15T15:00:00",
+            "source_message_id": "m010"
+        },
+        {
+            "message_id": "m061",
+            "title": "Reminder: your appointment on Sep 15",
+            "commitment_type": "APPOINTMENT",
+            "event_time": "2026-09-15T15:00:00",
+            "source_message_id": "m061"
+        },
+        {
+            "message_id": "m086",
+            "title": "Your Calendly event was scheduled",
+            "commitment_type": "EVENT",
+            "event_time": "2026-09-12T13:00:00",
+            "source_message_id": "m086"
+        }
+    ],
+    "conflicts": [
+        {
+            "commitment_a_id": "m010",
+            "commitment_b_id": "m061",
+            "conflict_time": "2026-09-15T15:00:00"
+        }
+    ]
+}
