@@ -1,4 +1,4 @@
-# commitment manager test
+# html renderer test 
 
 from core.inbox_loader import InboxLoader
 
@@ -6,36 +6,136 @@ from commitments.commitment_manager import (
     CommitmentManager,
 )
 
-loader = InboxLoader()
+from dashboard.dashboard_builder import (
+    DashboardBuilder,
+)
 
+from dashboard.html_renderer import (
+    HtmlRenderer,
+)
+
+loader = InboxLoader()
 messages = loader.load()
 
 manager = CommitmentManager()
 
 manager.build(messages)
 
-print(
-    "Commitments:",
-    len(
-        manager.get_commitments()
-    )
+builder = DashboardBuilder()
+
+dashboard = builder.build(
+    pending_actions=[
+        {
+            "message_id": "m012",
+            "action": "REPLY",
+        }
+    ],
+    flagged_items=[
+        {
+            "message_id": "m023",
+            "threat_type": "PHISHING",
+        }
+    ],
+    commitments=manager.get_commitments(),
+    conflicts=manager.get_conflicts(),
 )
 
-print(
-    "Conflicts:",
-    len(
-        manager.get_conflicts()
-    )
+renderer = HtmlRenderer()
+
+html_file = renderer.save(
+    dashboard
 )
 
-manager.save()
+print(html_file)
 
-print("\nSaved JSON\n")
+print()
 
-print(
-    manager.load()
-)
+print(renderer.render(dashboard))
 
+
+# ================================================================================
+
+# # Dashboard builder test
+
+# from core.inbox_loader import InboxLoader
+
+# from commitments.commitment_manager import (
+#     CommitmentManager,
+# )
+
+# from dashboard.dashboard_builder import (
+#     DashboardBuilder,
+# )
+
+# loader = InboxLoader()
+# messages = loader.load()
+
+# manager = CommitmentManager()
+
+# manager.build(messages)
+
+# builder = DashboardBuilder()
+
+# dashboard = builder.build(
+#     pending_actions=[
+#         {
+#             "message_id": "m012",
+#             "action": "REPLY",
+#         }
+#     ],
+#     flagged_items=[
+#         {
+#             "message_id": "m023",
+#             "threat_type": "PHISHING",
+#         }
+#     ],
+#     commitments=manager.get_commitments(),
+#     conflicts=manager.get_conflicts(),
+# )
+
+# print(dashboard.to_dict())
+
+# ================================================================================
+
+# # commitment manager test
+
+# from core.inbox_loader import InboxLoader
+
+# from commitments.commitment_manager import (
+#     CommitmentManager,
+# )
+
+# loader = InboxLoader()
+
+# messages = loader.load()
+
+# manager = CommitmentManager()
+
+# manager.build(messages)
+
+# print(
+#     "Commitments:",
+#     len(
+#         manager.get_commitments()
+#     )
+# )
+
+# print(
+#     "Conflicts:",
+#     len(
+#         manager.get_conflicts()
+#     )
+# )
+
+# manager.save()
+
+# print("\nSaved JSON\n")
+
+# print(
+#     manager.load()
+# )
+
+# ================================================================================
 
 
 # # Conflict detection test
