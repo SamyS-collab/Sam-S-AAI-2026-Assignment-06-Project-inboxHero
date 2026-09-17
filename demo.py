@@ -1,4 +1,4 @@
-# html renderer test 
+# Dashboard HTML Renderer Test
 
 from core.inbox_loader import InboxLoader
 
@@ -14,6 +14,10 @@ from dashboard.html_renderer import (
     HtmlRenderer,
 )
 
+# -----------------------------------------
+# Build commitment data
+# -----------------------------------------
+
 loader = InboxLoader()
 messages = loader.load()
 
@@ -21,36 +25,95 @@ manager = CommitmentManager()
 
 manager.build(messages)
 
+# -----------------------------------------
+# Build dashboard model
+# -----------------------------------------
+
 builder = DashboardBuilder()
 
+pending_actions = [
+    {
+        "message_id": "m012",
+        "action": "REPLY",
+        "human_reason": (
+            "Clarification required before the "
+            "reply can be finalized."
+        ),
+    }
+]
+
+flagged_items = [
+    {
+        "message_id": "m023",
+        "threat_type": "PHISHING",
+        "attempted_action": (
+            "Requested an immediate confidential "
+            "vendor wire transfer."
+        ),
+        "system_response": (
+            "REFUSED_AND_FLAGGED"
+        ),
+        "reason": (
+            "Potential social-engineering attempt."
+        ),
+    },
+
+    {
+        "message_id": "m017",
+        "threat_type": "PROMPT_INJECTION",
+        "attempted_action": (
+            "Attempted to override system "
+            "instructions."
+        ),
+        "system_response": (
+            "REFUSED_AND_FLAGGED"
+        ),
+        "reason": (
+            "Prompt-injection behavior detected."
+        ),
+    },
+]
+
 dashboard = builder.build(
-    pending_actions=[
-        {
-            "message_id": "m012",
-            "action": "REPLY",
-        }
-    ],
-    flagged_items=[
-        {
-            "message_id": "m023",
-            "threat_type": "PHISHING",
-        }
-    ],
+    pending_actions=pending_actions,
+    flagged_items=flagged_items,
     commitments=manager.get_commitments(),
     conflicts=manager.get_conflicts(),
 )
 
+# -----------------------------------------
+# Render dashboard
+# -----------------------------------------
+
 renderer = HtmlRenderer()
 
-html_file = renderer.save(
+output_file = renderer.save(
     dashboard
 )
 
-print(html_file)
+print(
+    "\nDashboard file created:\n"
+)
 
-print()
+print(output_file)
 
-print(renderer.render(dashboard))
+print(
+    "\nDashboard JSON:\n"
+)
+
+print(
+    dashboard.to_dict()
+)
+
+print(
+    "\nDashboard HTML:\n"
+)
+
+print(
+    renderer.render(dashboard)
+)
+
+
 
 
 # ================================================================================
@@ -67,33 +130,105 @@ print(renderer.render(dashboard))
 #     DashboardBuilder,
 # )
 
+
 # loader = InboxLoader()
 # messages = loader.load()
 
-# manager = CommitmentManager()
-
-# manager.build(messages)
+# commitment_manager = CommitmentManager()
+# commitment_manager.build(messages)
 
 # builder = DashboardBuilder()
 
+# pending_actions = [
+#     builder.build_pending_action(
+#         message_id="m012",
+#         action="REPLY",
+#         human_reason=(
+#             "The requested deadline is ambiguous. "
+#             "Human clarification is required before "
+#             "the reply can be finalized."
+#         ),
+#     )
+# ]
+
+# flagged_items = [
+#     builder.build_flagged_item(
+#         message_id="m023",
+#         threat_type="PHISHING",
+#         attempted_action=(
+#             "Requested an immediate confidential "
+#             "wire transfer without finance review."
+#         ),
+#         system_response=(
+#             "REFUSED_AND_FLAGGED"
+#         ),
+#     ),
+#     builder.build_flagged_item(
+#         message_id="m017",
+#         threat_type="PROMPT_INJECTION",
+#         attempted_action=(
+#             "Attempted to override InboxHero "
+#             "processing and safety instructions."
+#         ),
+#         system_response=(
+#             "REFUSED_FLAGGED_LOGGED_USER_NOTIFIED"
+#         ),
+#     ),
+# ]
+
 # dashboard = builder.build(
-#     pending_actions=[
-#         {
-#             "message_id": "m012",
-#             "action": "REPLY",
-#         }
-#     ],
-#     flagged_items=[
-#         {
-#             "message_id": "m023",
-#             "threat_type": "PHISHING",
-#         }
-#     ],
-#     commitments=manager.get_commitments(),
-#     conflicts=manager.get_conflicts(),
+#     pending_actions=pending_actions,
+#     flagged_items=flagged_items,
+#     commitments=(
+#         commitment_manager.get_commitments()
+#     ),
+#     conflicts=(
+#         commitment_manager.get_conflicts()
+#     ),
 # )
 
-# print(dashboard.to_dict())
+# dashboard_data = dashboard.to_dict()
+
+# print(dashboard_data)
+
+# print(
+#     "\nPane count:",
+#     len(dashboard_data),
+# )
+
+# print(
+#     "Pane names:",
+#     list(dashboard_data.keys()),
+# )
+
+# assert len(dashboard_data) == 3
+
+# assert list(dashboard_data.keys()) == [
+#     "pending_actions",
+#     "flagged_items",
+#     "commitments",
+# ]
+
+# assert (
+#     dashboard_data["pending_actions"][0]
+#     ["human_reason"]
+# )
+
+# assert (
+#     dashboard_data["flagged_items"][0]
+#     ["attempted_action"]
+# )
+
+# assert (
+#     dashboard_data["flagged_items"][0]
+#     ["system_response"]
+# )
+
+# print(
+#     "\nPASS: DashboardBuilder produced "
+#     "exactly three rubric-compliant panes."
+# )
+
 
 # ================================================================================
 
