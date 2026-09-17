@@ -1,117 +1,196 @@
-# Dashboard HTML Renderer Test
+# r4 preference memory test
+# ================================================================================
 
-from core.inbox_loader import InboxLoader
-
-from commitments.commitment_manager import (
-    CommitmentManager,
+from capabilities.r4_preference_memory import (
+    R4PreferenceMemory,
 )
 
-from dashboard.dashboard_builder import (
-    DashboardBuilder,
+report = (
+    R4PreferenceMemory()
+    .report()
 )
 
-from dashboard.html_renderer import (
-    HtmlRenderer,
-)
+print(report)
 
-# -----------------------------------------
-# Build commitment data
-# -----------------------------------------
+# ================================================================================
 
-loader = InboxLoader()
-messages = loader.load()
+# # R3 Safety Gate Test
 
-manager = CommitmentManager()
+# from core.dispositions import Disposition
 
-manager.build(messages)
+# from core.disposition_engine import (
+#     DispositionDecision,
+# )
 
-# -----------------------------------------
-# Build dashboard model
-# -----------------------------------------
+# from capabilities.r3_safety_gate import (
+#     R3SafetyGate,
+# )
 
-builder = DashboardBuilder()
+# decision = DispositionDecision(
+#     message_id="m001",
+#     disposition=Disposition.REPLY,
+#     reason="Meeting request detected",
+#     category="meeting",
+#     handled_by="rule",
+#     model_required=False,
+# )
 
-pending_actions = [
-    {
-        "message_id": "m012",
-        "action": "REPLY",
-        "human_reason": (
-            "Clarification required before the "
-            "reply can be finalized."
-        ),
-    }
-]
+# report = R3SafetyGate().evaluate(
+#     decision
+# )
 
-flagged_items = [
-    {
-        "message_id": "m023",
-        "threat_type": "PHISHING",
-        "attempted_action": (
-            "Requested an immediate confidential "
-            "vendor wire transfer."
-        ),
-        "system_response": (
-            "REFUSED_AND_FLAGGED"
-        ),
-        "reason": (
-            "Potential social-engineering attempt."
-        ),
-    },
+# print(report)
 
-    {
-        "message_id": "m017",
-        "threat_type": "PROMPT_INJECTION",
-        "attempted_action": (
-            "Attempted to override system "
-            "instructions."
-        ),
-        "system_response": (
-            "REFUSED_AND_FLAGGED"
-        ),
-        "reason": (
-            "Prompt-injection behavior detected."
-        ),
-    },
-]
 
-dashboard = builder.build(
-    pending_actions=pending_actions,
-    flagged_items=flagged_items,
-    commitments=manager.get_commitments(),
-    conflicts=manager.get_conflicts(),
-)
+# ================================================================================
 
-# -----------------------------------------
-# Render dashboard
-# -----------------------------------------
+# # R1 Zeroing Test
 
-renderer = HtmlRenderer()
+# from core.inbox_loader import InboxLoader
+# from core.router import Router
+# from core.disposition_engine import (
+#     DispositionEngine,
+# )
 
-output_file = renderer.save(
-    dashboard
-)
+# from capabilities.r1_zeroing import (
+#     R1Zeroing,
+# )
 
-print(
-    "\nDashboard file created:\n"
-)
+# loader = InboxLoader()
+# messages = loader.load()
 
-print(output_file)
+# router = Router()
+# engine = DispositionEngine()
 
-print(
-    "\nDashboard JSON:\n"
-)
+# for message in messages:
 
-print(
-    dashboard.to_dict()
-)
+#     router.route(message)
 
-print(
-    "\nDashboard HTML:\n"
-)
+#     engine.assign(message)
 
-print(
-    renderer.render(dashboard)
-)
+# report = R1Zeroing().validate(
+#     messages
+# )
+
+# print(report)
+
+# ================================================================================
+
+
+# # Dashboard HTML Renderer Test
+
+# from core.inbox_loader import InboxLoader
+
+# from commitments.commitment_manager import (
+#     CommitmentManager,
+# )
+
+# from dashboard.dashboard_builder import (
+#     DashboardBuilder,
+# )
+
+# from dashboard.html_renderer import (
+#     HtmlRenderer,
+# )
+
+# # -----------------------------------------
+# # Build commitment data
+# # -----------------------------------------
+
+# loader = InboxLoader()
+# messages = loader.load()
+
+# manager = CommitmentManager()
+
+# manager.build(messages)
+
+# # -----------------------------------------
+# # Build dashboard model
+# # -----------------------------------------
+
+# builder = DashboardBuilder()
+
+# pending_actions = [
+#     {
+#         "message_id": "m012",
+#         "action": "REPLY",
+#         "human_reason": (
+#             "Clarification required before the "
+#             "reply can be finalized."
+#         ),
+#     }
+# ]
+
+# flagged_items = [
+#     {
+#         "message_id": "m023",
+#         "threat_type": "PHISHING",
+#         "attempted_action": (
+#             "Requested an immediate confidential "
+#             "vendor wire transfer."
+#         ),
+#         "system_response": (
+#             "REFUSED_AND_FLAGGED"
+#         ),
+#         "reason": (
+#             "Potential social-engineering attempt."
+#         ),
+#     },
+
+#     {
+#         "message_id": "m017",
+#         "threat_type": "PROMPT_INJECTION",
+#         "attempted_action": (
+#             "Attempted to override system "
+#             "instructions."
+#         ),
+#         "system_response": (
+#             "REFUSED_AND_FLAGGED"
+#         ),
+#         "reason": (
+#             "Prompt-injection behavior detected."
+#         ),
+#     },
+# ]
+
+# dashboard = builder.build(
+#     pending_actions=pending_actions,
+#     flagged_items=flagged_items,
+#     commitments=manager.get_commitments(),
+#     conflicts=manager.get_conflicts(),
+# )
+
+# # -----------------------------------------
+# # Render dashboard
+# # -----------------------------------------
+
+# renderer = HtmlRenderer()
+
+# output_file = renderer.save(
+#     dashboard
+# )
+
+# print(
+#     "\nDashboard file created:\n"
+# )
+
+# print(output_file)
+
+# print(
+#     "\nDashboard JSON:\n"
+# )
+
+# print(
+#     dashboard.to_dict()
+# )
+
+# print(
+#     "\nDashboard HTML:\n"
+# )
+
+# print(
+#     renderer.render(dashboard)
+# )
 
 
 
