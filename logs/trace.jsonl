@@ -40,3 +40,5 @@
 {"timestamp": "2026-09-18T14:40:55.634031", "event": "HOSTILE_MESSAGE_DETECTED", "message_id": "m023", "threat_type": "PHISHING"}
 {"timestamp": "2026-09-18T14:40:55.635370", "event": "HOSTILE_MESSAGE_REFUSED", "message_id": "m023", "threat_type": "PHISHING"}
 {"timestamp": "2026-09-18T14:40:55.636965", "event": "USER_NOTIFICATION_CREATED", "message_id": "m023", "threat_type": "PHISHING"}
+{"timestamp": "2026-09-18T17:51:57.157159", "event": "DRAFT_WRITTEN", "message_id": "m012", "draft_type": "clarification", "file_path": "C:\\Users\\ssardal\\Sam-S-AAI-2026-Assignment-06-Project-inboxHero\\outbox\\m012_clarification.json"}
+{"timestamp": "2026-09-18T17:56:25.886724", "event": "DRAFT_WRITTEN", "message_id": "m008", "draft_type": "clarification", "file_path": "C:\\Users\\ssardal\\Sam-S-AAI-2026-Assignment-06-Project-inboxHero\\outbox\\m008_clarification.json"}
