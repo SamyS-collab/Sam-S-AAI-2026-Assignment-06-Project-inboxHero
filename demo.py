@@ -1,16 +1,308 @@
-# r4 preference memory test
+# X2 Followup Tracker Test
+
+from core.inbox_loader import InboxLoader
+from core.router import Router
+
+from core.disposition_engine import (
+    DispositionEngine,
+)
+
+from capabilities.x2_followup_tracker import (
+    X2FollowupTracker,
+)
+
+loader = InboxLoader()
+
+messages = loader.load()
+
+router = Router()
+engine = DispositionEngine()
+
+for message in messages:
+
+    router.route(message)
+
+    engine.assign(message)
+
+tracker = X2FollowupTracker()
+
+result = tracker.analyze(
+    messages
+)
+
+print(
+    "Followups:",
+    result["followups_found"]
+)
+
+print()
+
+for item in result["items"][:10]:
+
+    print(item)
+
+    print("-" * 60)
+
+
+# =====================================================================
+
+# # x4 explain decision test
+
+# from core.inbox_loader import InboxLoader
+# from core.router import Router
+# from core.disposition_engine import (
+#     DispositionEngine,
+# )
+
+# from capabilities.x4_explain_decision import (
+#     X4ExplainDecision,
+# )
+
+# # -----------------------------------------
+# # Load inbox
+# # -----------------------------------------
+
+# loader = InboxLoader()
+
+# messages = loader.load()
+
+# # -----------------------------------------
+# # Build routing + disposition metadata
+# # -----------------------------------------
+
+# router = Router()
+
+# engine = DispositionEngine()
+
+# for message in messages:
+
+#     router.route(message)
+
+#     engine.assign(message)
+
+# # -----------------------------------------
+# # X4 capability
+# # -----------------------------------------
+
+# explainer = X4ExplainDecision()
+
+# test_ids = {
+#     "m010",
+#     "m012",
+#     "m061",
+#     "m096",
+# }
+
+# print("\n=== X4 Explain Decision Verification ===\n")
+
+# for message in messages:
+
+#     if message.message_id not in test_ids:
+#         continue
+
+#     result = explainer.explain(
+#         message
+#     )
+
+#     print(
+#         f"Message: {message.message_id}"
+#     )
+
+#     print(result)
+
+#     print("-" * 60)
+
+
+
+# =======================================================================
+
+# # X5 Commitment Planner Test
+
+# from core.inbox_loader import InboxLoader
+
+# from commitments.commitment_manager import (
+#     CommitmentManager,
+# )
+
+# from capabilities.x5_commitment_planner import (
+#     X5CommitmentPlanner,
+# )
+
+# loader = InboxLoader()
+# messages = loader.load()
+
+# manager = CommitmentManager()
+
+# manager.build(messages)
+
+# planner = X5CommitmentPlanner(
+#     manager
+# )
+
+# result = planner.analyze()
+
+# print(result)
+
+# =======================================================================
+
+
+# # R6 Dashboard Test
+
+# from core.inbox_loader import InboxLoader
+
+# from commitments.commitment_manager import (
+#     CommitmentManager,
+# )
+
+# from dashboard.dashboard_builder import (
+#     DashboardBuilder,
+# )
+
+# from dashboard.html_renderer import (
+#     HtmlRenderer,
+# )
+
+# from capabilities.r6_dashboard import (
+#     R6Dashboard,
+# )
+
+# loader = InboxLoader()
+# messages = loader.load()
+
+# commitment_manager = CommitmentManager()
+# commitment_manager.build(messages)
+
+# builder = DashboardBuilder()
+
+# pending_actions = [
+#     builder.build_pending_action(
+#         message_id="m012",
+#         action="REPLY",
+#         human_reason=(
+#             "Clarification required "
+#             "before response."
+#         ),
+#     )
+# ]
+
+# flagged_items = [
+#     builder.build_flagged_item(
+#         message_id="m023",
+#         threat_type="PHISHING",
+#         attempted_action=(
+#             "Requested immediate "
+#             "wire transfer."
+#         ),
+#         system_response=(
+#             "REFUSED_AND_FLAGGED"
+#         ),
+#     )
+# ]
+
+# r6 = R6Dashboard()
+
+# result = r6.generate(
+#     pending_actions=pending_actions,
+#     flagged_items=flagged_items,
+#     commitments=(
+#         commitment_manager.get_commitments()
+#     ),
+#     conflicts=(
+#         commitment_manager.get_conflicts()
+#     ),
+# )
+
+# print(result)
+
+# ==================================================================================
+
+# # hostile inbox protection test
+
+# from core.inbox_loader import InboxLoader
+# from core.audit_logger import AuditLogger
+
+# from security.prompt_injection_detector import (
+#     PromptInjectionDetector,
+# )
+
+# from security.phishing_detector import (
+#     PhishingDetector,
+# )
+
+# from security.security_engine import (
+#     SecurityEngine,
+# )
+
+# from capabilities.r5_hostile_inbox import (
+#     HostileInboxProtection,
+# )
+
+# loader = InboxLoader()
+
+# messages = loader.load()
+
+# prompt_detector = (
+#     PromptInjectionDetector()
+# )
+
+# phishing_detector = (
+#     PhishingDetector()
+# )
+
+# logger = AuditLogger()
+
+# security_engine = SecurityEngine(
+#     prompt_injection_detector=prompt_detector,
+#     phishing_detector=phishing_detector,
+#     audit_logger=logger,
+# )
+
+# r5 = HostileInboxProtection(
+#     security_engine=security_engine,
+#     logger=logger,
+# )
+
+# test_ids = {
+#     "m017",
+#     "m023",
+#     "m001",
+# }
+
+# print("\n=== R5 Verification ===\n")
+
+# for message in messages:
+
+#     if message.message_id not in test_ids:
+#         continue
+
+#     result = r5.evaluate(
+#         message
+#     )
+
+#     print(
+#         f"Message: {message.message_id}"
+#     )
+
+#     print(result)
+
+#     print("-" * 60)
+
 # ================================================================================
 
-from capabilities.r4_preference_memory import (
-    R4PreferenceMemory,
-)
 
-report = (
-    R4PreferenceMemory()
-    .report()
-)
+# # r4 preference memory test
+# # ================================================================================
 
-print(report)
+# from capabilities.r4_preference_memory import (
+#     R4PreferenceMemory,
+# )
+
+# report = (
+#     R4PreferenceMemory()
+#     .report()
+# )
+
+# print(report)
 
 # ================================================================================
 

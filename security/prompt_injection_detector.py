@@ -42,6 +42,11 @@ PROMPT_INJECTION_PATTERNS = [
     "do not tell the user",
     "delete this message",
     "delete all messages",
+    "assistant managing this inbox",
+    "agent directive",
+    "must not surface this notice",
+    "do not surface this notice",
+    "release the held messages",
 ]
 
 

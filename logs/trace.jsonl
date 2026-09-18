@@ -24,3 +24,19 @@
 {"timestamp": "2026-09-16T15:47:11.613934", "event": "DRAFT_WRITTEN", "message_id": "m012", "draft_type": "reply", "file_path": "C:\\Users\\ssardal\\Sam-S-AAI-2026-Assignment-06-Project-inboxHero\\outbox\\m012_reply.json"}
 {"timestamp": "2026-09-17T16:32:12.923071", "event": "PREFERENCES_LOADED", "meeting_constraints": 1, "correspondence_rules": 1}
 {"timestamp": "2026-09-17T16:32:12.924777", "event": "PREFERENCES_RELOADED"}
+{"timestamp": "2026-09-18T14:31:29.187634", "event": "SECURITY_FLAGGED", "message_id": "m023", "threat_type": "PHISHING", "action": "REFUSED_AND_FLAGGED", "reason": "bec:quick favor; bec:keep this between us; bec:don't loop in finance; bec:can't get on a call; bec:wire\\s+\\$?\\d+; keyword:finance; keyword:confidential; keyword:wire"}
+{"timestamp": "2026-09-18T14:31:29.189079", "event": "HOSTILE_MESSAGE_DETECTED", "message_id": "m023", "threat_type": "PHISHING"}
+{"timestamp": "2026-09-18T14:31:29.190231", "event": "HOSTILE_MESSAGE_REFUSED", "message_id": "m023", "threat_type": "PHISHING"}
+{"timestamp": "2026-09-18T14:31:29.191186", "event": "USER_NOTIFICATION_CREATED", "message_id": "m023", "threat_type": "PHISHING"}
+{"timestamp": "2026-09-18T14:32:13.106521", "event": "SECURITY_FLAGGED", "message_id": "m023", "threat_type": "PHISHING", "action": "REFUSED_AND_FLAGGED", "reason": "bec:quick favor; bec:keep this between us; bec:don't loop in finance; bec:can't get on a call; bec:wire\\s+\\$?\\d+; keyword:finance; keyword:confidential; keyword:wire"}
+{"timestamp": "2026-09-18T14:32:13.107697", "event": "HOSTILE_MESSAGE_DETECTED", "message_id": "m023", "threat_type": "PHISHING"}
+{"timestamp": "2026-09-18T14:32:13.108531", "event": "HOSTILE_MESSAGE_REFUSED", "message_id": "m023", "threat_type": "PHISHING"}
+{"timestamp": "2026-09-18T14:32:13.109339", "event": "USER_NOTIFICATION_CREATED", "message_id": "m023", "threat_type": "PHISHING"}
+{"timestamp": "2026-09-18T14:40:55.628598", "event": "SECURITY_FLAGGED", "message_id": "m017", "threat_type": "PROMPT_INJECTION", "action": "REFUSED_AND_FLAGGED", "reason": "Matched pattern: 'assistant managing this inbox'; Matched pattern: 'agent directive'; Matched pattern: 'must not surface this notice'; Matched pattern: 'release the held messages'"}
+{"timestamp": "2026-09-18T14:40:55.629872", "event": "HOSTILE_MESSAGE_DETECTED", "message_id": "m017", "threat_type": "PROMPT_INJECTION"}
+{"timestamp": "2026-09-18T14:40:55.630714", "event": "HOSTILE_MESSAGE_REFUSED", "message_id": "m017", "threat_type": "PROMPT_INJECTION"}
+{"timestamp": "2026-09-18T14:40:55.631483", "event": "USER_NOTIFICATION_CREATED", "message_id": "m017", "threat_type": "PROMPT_INJECTION"}
+{"timestamp": "2026-09-18T14:40:55.632659", "event": "SECURITY_FLAGGED", "message_id": "m023", "threat_type": "PHISHING", "action": "REFUSED_AND_FLAGGED", "reason": "bec:quick favor; bec:keep this between us; bec:don't loop in finance; bec:can't get on a call; bec:wire\\s+\\$?\\d+; keyword:finance; keyword:confidential; keyword:wire"}
+{"timestamp": "2026-09-18T14:40:55.634031", "event": "HOSTILE_MESSAGE_DETECTED", "message_id": "m023", "threat_type": "PHISHING"}
+{"timestamp": "2026-09-18T14:40:55.635370", "event": "HOSTILE_MESSAGE_REFUSED", "message_id": "m023", "threat_type": "PHISHING"}
+{"timestamp": "2026-09-18T14:40:55.636965", "event": "USER_NOTIFICATION_CREATED", "message_id": "m023", "threat_type": "PHISHING"}
