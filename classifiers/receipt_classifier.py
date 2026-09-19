@@ -1,4 +1,4 @@
-# Recipet Classifier
+# Receipt Classifier
 
 """
 Responsibilities:

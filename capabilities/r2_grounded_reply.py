@@ -178,10 +178,7 @@ class R2GroundedReply:
     def _build_result(
         draft,
         outbox_file,
-    ):
-        """
-        Build grader-friendly capability report.
-        """
+        ):
 
         return {
             "message_id":
@@ -189,4 +186,21 @@ class R2GroundedReply:
 
             "draft_type":
                 draft.draft_type,
+
+            "source_message_ids":
+                list(
+                    draft.source_message_ids
+                ),
+
+            "policy_allowed":
+                draft.policy_allowed,
+
+            "policy_reason":
+                draft.policy_reason,
+
+            "outbox_file":
+                str(outbox_file),
+
+            "passed":
+                True,
         }

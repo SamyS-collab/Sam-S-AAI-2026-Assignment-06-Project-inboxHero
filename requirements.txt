@@ -1,0 +1,8 @@
+# Pre-Requisites
+
+# Install environment and Google Gene aI first
+
+py -m pip install python-dotenv
+py -m pip install google-genai
+
+

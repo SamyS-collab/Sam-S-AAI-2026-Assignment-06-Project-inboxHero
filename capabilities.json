@@ -1,0 +1,153 @@
+{
+  "student": "SAMIR SARDAL, cert-aai-2026-06-0051",
+  "repo": "https://github.com/SamyS-collab/Sam-S-AAI-2026-Assignment-06-Project-inboxHero",
+
+  "system": {
+    "framework": "none",
+
+    "model": "Gemini 3.5 Flash Lite / Gemini 3.5 Flash / Gemini 3.6 Flash depending on availability. Developed and verified through Google GenAI.",
+
+    "messages_processed": 100,
+
+    "rule_handled": 60,
+
+    "dispositions": [
+      "ARCHIVE",
+      "REPLY",
+      "DEFER",
+      "ESCALATE",
+      "FLAG"
+    ],
+
+    "retrieval": "thread-walk",
+
+    "irreversible": [
+      "send"
+    ],
+
+    "reversible": [
+      "draft",
+      "archive",
+      "defer",
+      "flag",
+      "escalate"
+    ],
+
+    "gate": "approval",
+
+    "preference_demo": "m041: No meetings before 11:00 AM"
+  },
+
+  "capabilities": [
+
+    {
+      "id": "R1",
+      "name": "Zeroing It",
+      "tier": "B",
+      "claim": "Processes all inbox messages and assigns exactly one disposition and one reason to every message, leaving none undecided.",
+      "command": "python demo.py --cap R1",
+      "observable": "Returns messages_processed=100, decisions_produced=100, missing_dispositions=0, missing_reasons=0 and passed=true.",
+      "evidence": "trace.jsonl and R1 capability output"
+    },
+
+    {
+      "id": "R2",
+      "name": "Grounded Reply Generation",
+      "tier": "B",
+      "claim": "Generates grounded replies using retrieved inbox messages, records source message ids and blocks unsafe credential disclosure.",
+      "command": "python demo.py --cap R2 --msg m008",
+      "observable": "Returns a clarification draft for m008, cites source_message_ids [m001,m003,m005,m008], blocks the credential-bearing AMQP connection string and reports policy_allowed=false.",
+      "evidence": "outbox artifact, R2 capability output and trace.jsonl"
+    },
+
+    {
+      "id": "R3",
+      "name": "Gate the Irreversible",
+      "tier": "C",
+      "claim": "Evaluates actions through a safety gate, records approval decisions and enforces outbox-only behavior.",
+      "command": "python demo.py --cap R3",
+      "observable": "Returns reversible, approval_required, approved, reason and passed values demonstrating safety-gate behavior.",
+      "evidence": "approval_log.json, trace.jsonl and R3 capability output"
+    },
+
+    {
+      "id": "R4",
+      "name": "Standing Instructions",
+      "tier": "C",
+      "claim": "Persists user preferences across process restarts and demonstrates successful reload of stored instructions.",
+      "command": "python demo.py --cap R4",
+      "observable": "Returns preference_count=2, restart_persistence_verified=true and displays the stored meeting and correspondence preferences.",
+      "evidence": "data/preferences.json, trace.jsonl and R4 capability output"
+    },
+
+    {
+      "id": "R5",
+      "name": "Hostile Inbox Protection",
+      "tier": "C",
+      "claim": "Detects prompt injections and phishing attempts, refuses them, flags them and reports them to the user.",
+      "command": "python demo.py --cap R5",
+      "observable": "Returns hostile findings including m017 as PROMPT_INJECTION and m023 as PHISHING, both refused and flagged.",
+      "evidence": "trace.jsonl, security_log.json and R5 capability output"
+    },
+
+    {
+      "id": "R6",
+      "name": "Dashboard",
+      "tier": "C",
+      "claim": "Generates a reproducible three-pane dashboard containing pending actions, flagged items and commitments with conflicts surfaced.",
+      "command": "python demo.py --cap R6",
+      "observable": "Writes dashboard.html. The Commitments pane includes a Launch Week Release commitment derived from source messages [m026,m036] and surfaces the m010 versus m061 scheduling conflict.",
+      "evidence": "dashboard/dashboard.html and R6 capability output"
+    },
+
+    {
+      "id": "X1",
+      "name": "Daily Digest",
+      "tier": "A",
+      "claim": "Produces a deterministic digest summarizing follow-ups, flagged items, commitments and conflicts.",
+      "command": "python demo.py --cap X1",
+      "observable": "Returns followups_found=9, flagged_count=2, commitments_found=5 and conflicts_found=1.",
+      "evidence": "X1 capability output"
+    },
+
+    {
+      "id": "X2",
+      "name": "Follow-up Tracker",
+      "tier": "B",
+      "claim": "Tracks actionable follow-up work using disposition metadata and excludes unresolved fallback_pending items.",
+      "command": "python demo.py --cap X2",
+      "observable": "Returns nine meaningful follow-up items including meeting responses, reminders and scheduled actions.",
+      "evidence": "X2 capability output"
+    },
+
+    {
+      "id": "X3",
+      "name": "Thread Summarizer",
+      "tier": "B",
+      "claim": "Summarizes message threads, identifies open questions and action items, preserves source message ids and validates summary safety.",
+      "command": "python demo.py --cap X3 --msg m008",
+      "observable": "Returns thread_id=t-api, source_message_ids [m001,m003,m005,m008], policy validation status and a safe summary.",
+      "evidence": "X3 capability output"
+    },
+
+    {
+      "id": "X4",
+      "name": "Explain Decision",
+      "tier": "C",
+      "claim": "Explains why a disposition was assigned using the stored category, disposition reason, processing source and model requirement metadata.",
+      "command": "python demo.py --cap X4 --msg m010",
+      "observable": "Returns category=meeting, disposition=REPLY, handled_by=rule, model_required=false and the stored explanation.",
+      "evidence": "X4 capability output"
+    },
+
+    {
+      "id": "X5",
+      "name": "Commitment Conflict Planner",
+      "tier": "C",
+      "claim": "Detects commitment conflicts and produces deterministic planning guidance requiring human review.",
+      "command": "python demo.py --cap X5",
+      "observable": "Returns one conflict between m010 and m061 at 2026-09-15T15:00:00 and recommends human review.",
+      "evidence": "X5 capability output and data/commitments.json"
+    }
+  ]
+}
