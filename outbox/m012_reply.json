@@ -1,9 +1,9 @@
 {
     "message_id": "m012",
     "draft_type": "reply",
-    "content": "Could you clarify the deadline?",
+    "content": "Could you please clarify what \"thing\" we talked about after the standup and provide more details about the call so I can get it sorted out for you?",
     "source_message_ids": [
         "m012"
     ],
-    "created_at": "2026-09-16T15:47:11.612694"
+    "created_at": "2026-09-19T20:28:44.998107"
 }
